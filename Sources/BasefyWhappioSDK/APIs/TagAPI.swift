@@ -16,19 +16,11 @@ open class TagAPI {
      Kişiye etiket ekler.
      
      - parameter addContactTagCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: BooleanApiReturn
      */
-    @discardableResult
-    open class func tagAddcontacttagPost(addContactTagCommand: AddContactTagCommand? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: BooleanApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return tagAddcontacttagPostWithRequestBuilder(addContactTagCommand: addContactTagCommand).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func tagAddcontacttagPost(addContactTagCommand: AddContactTagCommand? = nil) async throws -> BooleanApiReturn {
+        return try await tagAddcontacttagPostWithRequestBuilder(addContactTagCommand: addContactTagCommand).execute().body
     }
 
     /**
@@ -63,19 +55,11 @@ open class TagAPI {
      Bir kişinin etiket ekranı: işletmenin tüm etiketleri, kişiye ekli olanlar işaretli.
      
      - parameter contactId: (query) Kişi id&#39;si (contact/list veya conversation/list içindeki contact.id). (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: ContactTagDtoListApiReturn
      */
-    @discardableResult
-    open class func tagContacttagsGet(contactId: Int? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: ContactTagDtoListApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return tagContacttagsGetWithRequestBuilder(contactId: contactId).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func tagContacttagsGet(contactId: Int? = nil) async throws -> ContactTagDtoListApiReturn {
+        return try await tagContacttagsGetWithRequestBuilder(contactId: contactId).execute().body
     }
 
     /**
@@ -113,19 +97,11 @@ open class TagAPI {
      Yeni etiket ekler.
      
      - parameter createTagCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: TagDtoApiReturn
      */
-    @discardableResult
-    open class func tagCreatePost(createTagCommand: CreateTagCommand? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: TagDtoApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return tagCreatePostWithRequestBuilder(createTagCommand: createTagCommand).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func tagCreatePost(createTagCommand: CreateTagCommand? = nil) async throws -> TagDtoApiReturn {
+        return try await tagCreatePostWithRequestBuilder(createTagCommand: createTagCommand).execute().body
     }
 
     /**
@@ -160,19 +136,11 @@ open class TagAPI {
      Etiketi siler.
      
      - parameter deleteTagCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: BooleanApiReturn
      */
-    @discardableResult
-    open class func tagDeletePost(deleteTagCommand: DeleteTagCommand? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: BooleanApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return tagDeletePostWithRequestBuilder(deleteTagCommand: deleteTagCommand).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func tagDeletePost(deleteTagCommand: DeleteTagCommand? = nil) async throws -> BooleanApiReturn {
+        return try await tagDeletePostWithRequestBuilder(deleteTagCommand: deleteTagCommand).execute().body
     }
 
     /**
@@ -209,19 +177,11 @@ open class TagAPI {
      - parameter search: (query) Etiket adında veya açıklamasında geçen metin. Boş bırakılırsa tüm etiketler. (optional)
      - parameter currentPage: (query) İstenen sayfa (1&#39;den başlar). Varsayılan: 1. (optional)
      - parameter pageSize: (query) Sayfa başına kayıt. Varsayılan: 20, en fazla: 100. (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: TagDtoPagedApiReturn
      */
-    @discardableResult
-    open class func tagListGet(search: String? = nil, currentPage: Int? = nil, pageSize: Int? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: TagDtoPagedApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return tagListGetWithRequestBuilder(search: search, currentPage: currentPage, pageSize: pageSize).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func tagListGet(search: String? = nil, currentPage: Int? = nil, pageSize: Int? = nil) async throws -> TagDtoPagedApiReturn {
+        return try await tagListGetWithRequestBuilder(search: search, currentPage: currentPage, pageSize: pageSize).execute().body
     }
 
     /**
@@ -263,19 +223,11 @@ open class TagAPI {
      Kişiden etiketi kaldırır.
      
      - parameter removeContactTagCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: BooleanApiReturn
      */
-    @discardableResult
-    open class func tagRemovecontacttagPost(removeContactTagCommand: RemoveContactTagCommand? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: BooleanApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return tagRemovecontacttagPostWithRequestBuilder(removeContactTagCommand: removeContactTagCommand).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func tagRemovecontacttagPost(removeContactTagCommand: RemoveContactTagCommand? = nil) async throws -> BooleanApiReturn {
+        return try await tagRemovecontacttagPostWithRequestBuilder(removeContactTagCommand: removeContactTagCommand).execute().body
     }
 
     /**
@@ -310,19 +262,11 @@ open class TagAPI {
      Etiketin adını ve açıklamasını günceller.
      
      - parameter updateTagCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: TagDtoApiReturn
      */
-    @discardableResult
-    open class func tagUpdatePost(updateTagCommand: UpdateTagCommand? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: TagDtoApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return tagUpdatePostWithRequestBuilder(updateTagCommand: updateTagCommand).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func tagUpdatePost(updateTagCommand: UpdateTagCommand? = nil) async throws -> TagDtoApiReturn {
+        return try await tagUpdatePostWithRequestBuilder(updateTagCommand: updateTagCommand).execute().body
     }
 
     /**

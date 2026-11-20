@@ -16,19 +16,11 @@ open class ContactAPI {
      Kişiyi WhatsApp'ta engeller veya engelini kaldırır.
      
      - parameter setContactBlockedCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: BooleanApiReturn
      */
-    @discardableResult
-    open class func contactBlockPost(setContactBlockedCommand: SetContactBlockedCommand? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: BooleanApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return contactBlockPostWithRequestBuilder(setContactBlockedCommand: setContactBlockedCommand).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func contactBlockPost(setContactBlockedCommand: SetContactBlockedCommand? = nil) async throws -> BooleanApiReturn {
+        return try await contactBlockPostWithRequestBuilder(setContactBlockedCommand: setContactBlockedCommand).execute().body
     }
 
     /**
@@ -63,19 +55,11 @@ open class ContactAPI {
      Kişi formundaki şehir seçimi için şehirleri listeler.
      
      - parameter Q: (query) Şehir adında veya plaka kodunda geçen metin (ör. \&quot;ist\&quot; veya \&quot;34\&quot;). Boş bırakılırsa tüm şehirler. (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: CityDtoListApiReturn
      */
-    @discardableResult
-    open class func contactCitiesGet(Q: String? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: CityDtoListApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return contactCitiesGetWithRequestBuilder(Q: Q).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func contactCitiesGet(Q: String? = nil) async throws -> CityDtoListApiReturn {
+        return try await contactCitiesGetWithRequestBuilder(Q: Q).execute().body
     }
 
     /**
@@ -113,19 +97,11 @@ open class ContactAPI {
      Yeni kişi ekler.
      
      - parameter createContactCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: ContactDetailDtoApiReturn
      */
-    @discardableResult
-    open class func contactCreatePost(createContactCommand: CreateContactCommand? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: ContactDetailDtoApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return contactCreatePostWithRequestBuilder(createContactCommand: createContactCommand).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func contactCreatePost(createContactCommand: CreateContactCommand? = nil) async throws -> ContactDetailDtoApiReturn {
+        return try await contactCreatePostWithRequestBuilder(createContactCommand: createContactCommand).execute().body
     }
 
     /**
@@ -160,19 +136,11 @@ open class ContactAPI {
      Kişiyi siler.
      
      - parameter deleteContactCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: BooleanApiReturn
      */
-    @discardableResult
-    open class func contactDeletePost(deleteContactCommand: DeleteContactCommand? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: BooleanApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return contactDeletePostWithRequestBuilder(deleteContactCommand: deleteContactCommand).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func contactDeletePost(deleteContactCommand: DeleteContactCommand? = nil) async throws -> BooleanApiReturn {
+        return try await contactDeletePostWithRequestBuilder(deleteContactCommand: deleteContactCommand).execute().body
     }
 
     /**
@@ -207,19 +175,11 @@ open class ContactAPI {
      Kişinin tüm bilgilerini döner (düzenleme formu bu verilerle doldurulur).
      
      - parameter id: (query) Kişi id&#39;si. (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: ContactDetailDtoApiReturn
      */
-    @discardableResult
-    open class func contactDetailGet(id: Int? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: ContactDetailDtoApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return contactDetailGetWithRequestBuilder(id: id).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func contactDetailGet(id: Int? = nil) async throws -> ContactDetailDtoApiReturn {
+        return try await contactDetailGetWithRequestBuilder(id: id).execute().body
     }
 
     /**
@@ -261,19 +221,11 @@ open class ContactAPI {
      - parameter isAcceptPublications: (query) Ticari ileti izni filtresi: 0 &#x3D; Belirsiz, 1 &#x3D; İzin verdi, 2 &#x3D; İzin vermedi. Boş bırakılırsa filtre uygulanmaz. (optional)
      - parameter currentPage: (query) İstenen sayfa (1&#39;den başlar). Varsayılan: 1. (optional)
      - parameter pageSize: (query) Sayfa başına kayıt. Varsayılan: 20, en fazla: 100. (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: ContactListItemDtoPagedApiReturn
      */
-    @discardableResult
-    open class func contactListGet(search: String? = nil, tagId: Int? = nil, isAcceptPublications: IsAcceptPublications? = nil, currentPage: Int? = nil, pageSize: Int? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: ContactListItemDtoPagedApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return contactListGetWithRequestBuilder(search: search, tagId: tagId, isAcceptPublications: isAcceptPublications, currentPage: currentPage, pageSize: pageSize).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func contactListGet(search: String? = nil, tagId: Int? = nil, isAcceptPublications: IsAcceptPublications? = nil, currentPage: Int? = nil, pageSize: Int? = nil) async throws -> ContactListItemDtoPagedApiReturn {
+        return try await contactListGetWithRequestBuilder(search: search, tagId: tagId, isAcceptPublications: isAcceptPublications, currentPage: currentPage, pageSize: pageSize).execute().body
     }
 
     /**
@@ -319,19 +271,11 @@ open class ContactAPI {
      Kişi bilgilerini günceller.
      
      - parameter updateContactCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: ContactDetailDtoApiReturn
      */
-    @discardableResult
-    open class func contactUpdatePost(updateContactCommand: UpdateContactCommand? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: ContactDetailDtoApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return contactUpdatePostWithRequestBuilder(updateContactCommand: updateContactCommand).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func contactUpdatePost(updateContactCommand: UpdateContactCommand? = nil) async throws -> ContactDetailDtoApiReturn {
+        return try await contactUpdatePostWithRequestBuilder(updateContactCommand: updateContactCommand).execute().body
     }
 
     /**

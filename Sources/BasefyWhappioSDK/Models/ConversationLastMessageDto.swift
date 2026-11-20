@@ -46,3 +46,10 @@ public struct ConversationLastMessageDto: Codable, JSONEncodable, Hashable {
     }
 }
 
+
+extension ConversationLastMessageDto: UnknownCaseCheckable {
+    public var containsUnknownDefaultOpenApiCase: Bool {
+        if messageType == .unknownDefaultOpenApi { return true }
+        return false
+    }
+}

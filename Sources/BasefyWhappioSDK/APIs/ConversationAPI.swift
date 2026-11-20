@@ -16,19 +16,11 @@ open class ConversationAPI {
      Sohbeti başka bir temsilciye atar.
      
      - parameter assignConversationCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: BooleanApiReturn
      */
-    @discardableResult
-    open class func conversationAssignPost(assignConversationCommand: AssignConversationCommand? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: BooleanApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return conversationAssignPostWithRequestBuilder(assignConversationCommand: assignConversationCommand).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func conversationAssignPost(assignConversationCommand: AssignConversationCommand? = nil) async throws -> BooleanApiReturn {
+        return try await conversationAssignPostWithRequestBuilder(assignConversationCommand: assignConversationCommand).execute().body
     }
 
     /**
@@ -62,19 +54,11 @@ open class ConversationAPI {
     /**
      Sohbetin atanabileceği temsilciler.
      
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: AssignableUserDtoListApiReturn
      */
-    @discardableResult
-    open class func conversationAssignableusersGet(apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: AssignableUserDtoListApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return conversationAssignableusersGetWithRequestBuilder().execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func conversationAssignableusersGet() async throws -> AssignableUserDtoListApiReturn {
+        return try await conversationAssignableusersGetWithRequestBuilder().execute().body
     }
 
     /**
@@ -108,19 +92,11 @@ open class ConversationAPI {
      Sohbeti giriş yapan temsilcinin üzerine alır.
      
      - parameter assignConversationToMeCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: BooleanApiReturn
      */
-    @discardableResult
-    open class func conversationAssigntomePost(assignConversationToMeCommand: AssignConversationToMeCommand? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: BooleanApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return conversationAssigntomePostWithRequestBuilder(assignConversationToMeCommand: assignConversationToMeCommand).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func conversationAssigntomePost(assignConversationToMeCommand: AssignConversationToMeCommand? = nil) async throws -> BooleanApiReturn {
+        return try await conversationAssigntomePostWithRequestBuilder(assignConversationToMeCommand: assignConversationToMeCommand).execute().body
     }
 
     /**
@@ -155,19 +131,11 @@ open class ConversationAPI {
      Sohbette AI chatbot'un açık olup olmadığını döner.
      
      - parameter phoneNumber: (query) Müşterinin telefonu (conversation/list içindeki phoneNumber). (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: BooleanApiReturn
      */
-    @discardableResult
-    open class func conversationChatbotGet(phoneNumber: String? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: BooleanApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return conversationChatbotGetWithRequestBuilder(phoneNumber: phoneNumber).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func conversationChatbotGet(phoneNumber: String? = nil) async throws -> BooleanApiReturn {
+        return try await conversationChatbotGetWithRequestBuilder(phoneNumber: phoneNumber).execute().body
     }
 
     /**
@@ -205,19 +173,11 @@ open class ConversationAPI {
      Sohbette AI chatbot'u açar veya kapatır.
      
      - parameter setChatBotCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: BooleanApiReturn
      */
-    @discardableResult
-    open class func conversationChatbotPost(setChatBotCommand: SetChatBotCommand? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: BooleanApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return conversationChatbotPostWithRequestBuilder(setChatBotCommand: setChatBotCommand).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func conversationChatbotPost(setChatBotCommand: SetChatBotCommand? = nil) async throws -> BooleanApiReturn {
+        return try await conversationChatbotPostWithRequestBuilder(setChatBotCommand: setChatBotCommand).execute().body
     }
 
     /**
@@ -253,19 +213,11 @@ open class ConversationAPI {
      
      - parameter currentPage: (query) İstenen sayfa (1&#39;den başlar). Varsayılan: 1. (optional)
      - parameter pageSize: (query) Sayfa başına kayıt. Varsayılan: 20, en fazla: 100. (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: ConversationListItemDtoPagedApiReturn
      */
-    @discardableResult
-    open class func conversationListGet(currentPage: Int? = nil, pageSize: Int? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: ConversationListItemDtoPagedApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return conversationListGetWithRequestBuilder(currentPage: currentPage, pageSize: pageSize).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func conversationListGet(currentPage: Int? = nil, pageSize: Int? = nil) async throws -> ConversationListItemDtoPagedApiReturn {
+        return try await conversationListGetWithRequestBuilder(currentPage: currentPage, pageSize: pageSize).execute().body
     }
 
     /**
@@ -305,19 +257,11 @@ open class ConversationAPI {
      Sohbeti okundu olarak işaretler (okunmadı rozeti kalkar).
      
      - parameter phoneNumberRequest: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: BooleanApiReturn
      */
-    @discardableResult
-    open class func conversationMarkasreadPost(phoneNumberRequest: PhoneNumberRequest? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: BooleanApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return conversationMarkasreadPostWithRequestBuilder(phoneNumberRequest: phoneNumberRequest).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func conversationMarkasreadPost(phoneNumberRequest: PhoneNumberRequest? = nil) async throws -> BooleanApiReturn {
+        return try await conversationMarkasreadPostWithRequestBuilder(phoneNumberRequest: phoneNumberRequest).execute().body
     }
 
     /**
@@ -352,19 +296,11 @@ open class ConversationAPI {
      Sohbeti okunmadı olarak işaretler (okunmadı rozeti görünür).
      
      - parameter phoneNumberRequest: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: BooleanApiReturn
      */
-    @discardableResult
-    open class func conversationMarkasunreadPost(phoneNumberRequest: PhoneNumberRequest? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: BooleanApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return conversationMarkasunreadPostWithRequestBuilder(phoneNumberRequest: phoneNumberRequest).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func conversationMarkasunreadPost(phoneNumberRequest: PhoneNumberRequest? = nil) async throws -> BooleanApiReturn {
+        return try await conversationMarkasunreadPostWithRequestBuilder(phoneNumberRequest: phoneNumberRequest).execute().body
     }
 
     /**
@@ -402,19 +338,11 @@ open class ConversationAPI {
      - parameter beforeDate: (query) İlk istekte boş bırakılır (en yeni mesajlar). Daha eskiler için önceki yanıttaki nextBeforeDate gönderilir. (optional)
      - parameter beforeId: (query) beforeDate ile birlikte, önceki yanıttaki nextBeforeId gönderilir. (optional)
      - parameter pageSize: (query) Sayfa başına mesaj. Varsayılan: 20, en fazla: 50. (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: ConversationMessagesDtoApiReturn
      */
-    @discardableResult
-    open class func conversationMessagesGet(phoneNumber: String? = nil, beforeDate: Int64? = nil, beforeId: Int? = nil, pageSize: Int? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: ConversationMessagesDtoApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return conversationMessagesGetWithRequestBuilder(phoneNumber: phoneNumber, beforeDate: beforeDate, beforeId: beforeId, pageSize: pageSize).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func conversationMessagesGet(phoneNumber: String? = nil, beforeDate: Int64? = nil, beforeId: Int? = nil, pageSize: Int? = nil) async throws -> ConversationMessagesDtoApiReturn {
+        return try await conversationMessagesGetWithRequestBuilder(phoneNumber: phoneNumber, beforeDate: beforeDate, beforeId: beforeId, pageSize: pageSize).execute().body
     }
 
     /**
@@ -458,19 +386,11 @@ open class ConversationAPI {
      Müşteriye metin veya konum mesajı gönderir. GERÇEK WhatsApp mesajı gider.
      
      - parameter sendConversationMessageCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: BooleanApiReturn
      */
-    @discardableResult
-    open class func conversationSendPost(sendConversationMessageCommand: SendConversationMessageCommand? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: BooleanApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return conversationSendPostWithRequestBuilder(sendConversationMessageCommand: sendConversationMessageCommand).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func conversationSendPost(sendConversationMessageCommand: SendConversationMessageCommand? = nil) async throws -> BooleanApiReturn {
+        return try await conversationSendPostWithRequestBuilder(sendConversationMessageCommand: sendConversationMessageCommand).execute().body
     }
 
     /**
@@ -505,19 +425,11 @@ open class ConversationAPI {
      Müşteriye geri bildirim (memnuniyet puanlama) mesajı gönderir. GERÇEK WhatsApp mesajı gider.
      
      - parameter sendFeedbackMessageCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: BooleanApiReturn
      */
-    @discardableResult
-    open class func conversationSendfeedbackPost(sendFeedbackMessageCommand: SendFeedbackMessageCommand? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: BooleanApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return conversationSendfeedbackPostWithRequestBuilder(sendFeedbackMessageCommand: sendFeedbackMessageCommand).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func conversationSendfeedbackPost(sendFeedbackMessageCommand: SendFeedbackMessageCommand? = nil) async throws -> BooleanApiReturn {
+        return try await conversationSendfeedbackPostWithRequestBuilder(sendFeedbackMessageCommand: sendFeedbackMessageCommand).execute().body
     }
 
     /**
@@ -555,19 +467,11 @@ open class ConversationAPI {
      - parameter file: (form) Gönderilecek dosya (jpg, jpeg, png, mp4, mp3, m4a, pdf). (optional)
      - parameter caption: (form) Resim/video altındaki açıklama. Opsiyonel; ses ve PDF&#39;te müşteriye gitmez. (optional)
      - parameter externalIdOfReplied: (form) Bir mesaja yanıt veriliyorsa o mesajın externalId&#39;si. Yanıt değilse boş bırakılır. (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: BooleanApiReturn
      */
-    @discardableResult
-    open class func conversationSendmediaPost(phoneNumber: String? = nil, file: URL? = nil, caption: String? = nil, externalIdOfReplied: String? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: BooleanApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return conversationSendmediaPostWithRequestBuilder(phoneNumber: phoneNumber, file: file, caption: caption, externalIdOfReplied: externalIdOfReplied).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func conversationSendmediaPost(phoneNumber: String? = nil, file: URL? = nil, caption: String? = nil, externalIdOfReplied: String? = nil) async throws -> BooleanApiReturn {
+        return try await conversationSendmediaPostWithRequestBuilder(phoneNumber: phoneNumber, file: file, caption: caption, externalIdOfReplied: externalIdOfReplied).execute().body
     }
 
     /**
@@ -613,19 +517,11 @@ open class ConversationAPI {
      Görüşmeyi sonlandırır (ticket'ı kapatır).
      
      - parameter terminateConversationCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: BooleanApiReturn
      */
-    @discardableResult
-    open class func conversationTerminatePost(terminateConversationCommand: TerminateConversationCommand? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: BooleanApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return conversationTerminatePostWithRequestBuilder(terminateConversationCommand: terminateConversationCommand).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func conversationTerminatePost(terminateConversationCommand: TerminateConversationCommand? = nil) async throws -> BooleanApiReturn {
+        return try await conversationTerminatePostWithRequestBuilder(terminateConversationCommand: terminateConversationCommand).execute().body
     }
 
     /**
@@ -660,19 +556,11 @@ open class ConversationAPI {
      WhatsApp 24 saat mesaj penceresinin durumu.
      
      - parameter phoneNumber: (query) Müşterinin telefonu (conversation/list içindeki phoneNumber). (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: ChatWindowDtoApiReturn
      */
-    @discardableResult
-    open class func conversationWindowGet(phoneNumber: String? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: ChatWindowDtoApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return conversationWindowGetWithRequestBuilder(phoneNumber: phoneNumber).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func conversationWindowGet(phoneNumber: String? = nil) async throws -> ChatWindowDtoApiReturn {
+        return try await conversationWindowGetWithRequestBuilder(phoneNumber: phoneNumber).execute().body
     }
 
     /**

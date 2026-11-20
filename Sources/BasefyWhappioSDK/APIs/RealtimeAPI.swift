@@ -15,19 +15,11 @@ open class RealtimeAPI {
     /**
      Canlı mesaj bağlantısı (SignalR hub) için 24 saat geçerli bağlantı token'ı üretir.
      
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: RealtimeTokenDtoApiReturn
      */
-    @discardableResult
-    open class func realtimeTokenGet(apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: RealtimeTokenDtoApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return realtimeTokenGetWithRequestBuilder().execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func realtimeTokenGet() async throws -> RealtimeTokenDtoApiReturn {
+        return try await realtimeTokenGetWithRequestBuilder().execute().body
     }
 
     /**

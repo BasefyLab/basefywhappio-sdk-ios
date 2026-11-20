@@ -45,3 +45,11 @@ public struct RepliedMessageDto: Codable, JSONEncodable, Hashable {
     }
 }
 
+
+extension RepliedMessageDto: UnknownCaseCheckable {
+    public var containsUnknownDefaultOpenApiCase: Bool {
+        if messageType == .unknownDefaultOpenApi { return true }
+        if senderType == .unknownDefaultOpenApi { return true }
+        return false
+    }
+}

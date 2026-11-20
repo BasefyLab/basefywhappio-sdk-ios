@@ -15,19 +15,11 @@ open class MeAPI {
     /**
      Kullanıcının çevrimiçi olup olmadığını döner.
      
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: BooleanApiReturn
      */
-    @discardableResult
-    open class func meStatusGet(apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: BooleanApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return meStatusGetWithRequestBuilder().execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func meStatusGet() async throws -> BooleanApiReturn {
+        return try await meStatusGetWithRequestBuilder().execute().body
     }
 
     /**
@@ -61,19 +53,11 @@ open class MeAPI {
      Kullanıcıyı çevrimiçi veya çevrimdışı yapar.
      
      - parameter setMyStatusCommand: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: BooleanApiReturn
      */
-    @discardableResult
-    open class func meStatusPost(setMyStatusCommand: SetMyStatusCommand? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: BooleanApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return meStatusPostWithRequestBuilder(setMyStatusCommand: setMyStatusCommand).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func meStatusPost(setMyStatusCommand: SetMyStatusCommand? = nil) async throws -> BooleanApiReturn {
+        return try await meStatusPostWithRequestBuilder(setMyStatusCommand: setMyStatusCommand).execute().body
     }
 
     /**

@@ -16,19 +16,11 @@ open class AuthAPI {
      Kullanıcı adı ve parola ile giriş yapar, JWT döner.
      
      - parameter loginRequest: (body)  (optional)
-     - parameter apiResponseQueue: The queue on which api response is dispatched.
-     - parameter completion: completion handler to receive the data and the error objects
+     - returns: LoginResponseApiReturn
      */
-    @discardableResult
-    open class func authLoginPost(loginRequest: LoginRequest? = nil, apiResponseQueue: DispatchQueue = BasefyWhappioSDKAPI.apiResponseQueue, completion: @escaping ((_ data: LoginResponseApiReturn?, _ error: Error?) -> Void)) -> RequestTask {
-        return authLoginPostWithRequestBuilder(loginRequest: loginRequest).execute(apiResponseQueue) { result in
-            switch result {
-            case let .success(response):
-                completion(response.body, nil)
-            case let .failure(error):
-                completion(nil, error)
-            }
-        }
+    @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+    open class func authLoginPost(loginRequest: LoginRequest? = nil) async throws -> LoginResponseApiReturn {
+        return try await authLoginPostWithRequestBuilder(loginRequest: loginRequest).execute().body
     }
 
     /**

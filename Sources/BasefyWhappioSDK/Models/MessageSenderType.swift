@@ -10,7 +10,7 @@ import Foundation
 import AnyCodable
 #endif
 
-public enum MessageSenderType: Int, Codable, CaseIterable {
+public enum MessageSenderType: Int, Codable, CaseIterable, CaseIterableDefaultsLast {
     case _0 = 0
     case _1 = 1
     case _2 = 2
@@ -18,4 +18,11 @@ public enum MessageSenderType: Int, Codable, CaseIterable {
     case _4 = 4
     case _5 = 5
     case _6 = 6
+    case unknownDefaultOpenApi = 11184809
+}
+
+extension MessageSenderType: UnknownCaseCheckable {
+    public var containsUnknownDefaultOpenApiCase: Bool {
+        self == .unknownDefaultOpenApi
+    }
 }

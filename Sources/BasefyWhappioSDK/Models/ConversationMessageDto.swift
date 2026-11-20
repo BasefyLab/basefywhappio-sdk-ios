@@ -92,3 +92,11 @@ public struct ConversationMessageDto: Codable, JSONEncodable, Hashable {
 
 @available(iOS 13, tvOS 13, watchOS 6, macOS 10.15, *)
 extension ConversationMessageDto: Identifiable {}
+
+extension ConversationMessageDto: UnknownCaseCheckable {
+    public var containsUnknownDefaultOpenApiCase: Bool {
+        if messageType == .unknownDefaultOpenApi { return true }
+        if senderType == .unknownDefaultOpenApi { return true }
+        return false
+    }
+}

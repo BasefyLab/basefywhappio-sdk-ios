@@ -59,3 +59,10 @@ public struct ContactListItemDto: Codable, JSONEncodable, Hashable {
 
 @available(iOS 13, tvOS 13, watchOS 6, macOS 10.15, *)
 extension ContactListItemDto: Identifiable {}
+
+extension ContactListItemDto: UnknownCaseCheckable {
+    public var containsUnknownDefaultOpenApiCase: Bool {
+        if isAcceptPublications == .unknownDefaultOpenApi { return true }
+        return false
+    }
+}

@@ -63,3 +63,12 @@ public struct CreateContactCommand: Codable, JSONEncodable, Hashable {
     }
 }
 
+
+extension CreateContactCommand: UnknownCaseCheckable {
+    public var containsUnknownDefaultOpenApiCase: Bool {
+        if gender == .unknownDefaultOpenApi { return true }
+        if languageType == .unknownDefaultOpenApi { return true }
+        if isAcceptPublications == .unknownDefaultOpenApi { return true }
+        return false
+    }
+}
