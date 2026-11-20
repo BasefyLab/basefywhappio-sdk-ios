@@ -1,0 +1,22 @@
+name: iOS SDK test
+
+on:
+  push:
+    tags: ['*']
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: iOS için derle
+        run: xcodebuild -scheme BasefyWhappioSDK -destination 'generic/platform=iOS Simulator' build
+
+      - name: Duman testi
+        working-directory: SmokeTest
+        run: swift run
+        env:
+          SDK_USER: ${{ secrets.SDK_USER }}
+          SDK_PASS: ${{ secrets.SDK_PASS }}
